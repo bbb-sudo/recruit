@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>热招职位</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/layui@2.9.6/dist/css/layui.css">
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background: #232a36;
+    }
+    body {
+      min-height: 100vh;
+      min-width: 100vw;
+      height: 100vh;
+      width: 100vw;
+      overflow: auto;
+    }
+    .hot-jobs-panel {
+      width: 100vw;
+      height: 100vh;
+      min-height: 100vh;
+      min-width: 100vw;
+      margin: 0;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 60px 8vw 30px 8vw;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    .hot-title {
+      text-align: center;
+      font-size: 2.3rem;
+      font-weight: 600;
+      margin-bottom: 38px;
+      letter-spacing: 2px;
+      color: #4A3AFF;
+      width: 100%;
+    }
+    .layui-table {
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fafbfc;
+      margin-bottom: 0;
+      width: 100%;
+      max-width: 100%;
+      min-width: 300px;
+      font-size: 1.12rem;
+    }
+    .layui-table thead tr {
+      background: #4A3AFF;
+      color: #fff;
+      font-size: 1.15rem;
+    }
+    .layui-table tbody tr {
+      transition: background 0.2s;
+      cursor: pointer;
+      font-size: 1.08rem;
+    }
+    .layui-table tbody tr:hover {
+      background: #e9f7ff!important;
+      box-shadow: 0 2px 8px rgba(74,58,255,0.08);
+    }
+    .salary-badge {
+      background: #2DC4C8;
+      color: #fff;
+      border-radius: 16px;
+      padding: 4px 18px;
+      font-size: 1.06rem;
+      margin-left: 4px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      display: inline-block;
+    }
+    .company-badge {
+      background: #f4f7fd;
+      color: #4A3AFF;
+      border-radius: 12px;
+      padding: 4px 14px;
+      font-size: 1rem;
+      margin-left: 4px;
+      display: inline-block;
+      font-weight: 500;
+    }
+    @media (max-width: 900px) {
+      .hot-jobs-panel {
+        padding: 36px 2vw 16px 2vw;
+      }
+      .layui-table th, .layui-table td {
+        font-size: 15px;
+      }
+      .hot-title {
+        font-size: 1.5rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .hot-jobs-panel {
+        padding: 18px 0 8px 0;
+      }
+      .hot-title {
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+      }
+      .layui-table {
+        min-width: 0;
+        font-size: 14px;
+      }
+      .salary-badge, .company-badge {
+        font-size: 0.95rem;
+        padding: 2px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="hot-jobs-panel">
+  <div class="hot-title">热招职位</div>
+  <table class="layui-table">
+    <thead>
+      <tr><th>职位</th><th>薪资</th><th>公司</th></tr>
+    </thead>
+    <tbody>
+      <tr onclick="toDetail('外卖员')">
+        <td>外卖员</td>
+        <td><span class="salary-badge">6k/月</span></td>
+        <td><span class="company-badge">京东</span></td>
+      </tr>
+      <tr onclick="toDetail('厨师')">
+        <td>厨师</td>
+        <td><span class="salary-badge">8k/月</span></td>
+        <td><span class="company-badge">绿茶餐厅</span></td>
+      </tr>
+      <tr onclick="toDetail('程序员')">
+        <td>程序员</td>
+        <td><span class="salary-badge">9k/月</span></td>
+        <td><span class="company-badge">阿里</span></td>
+      </tr>
+      <tr onclick="toDetail('老师')">
+        <td>老师</td>
+        <td><span class="salary-badge">6k/月</span></td>
+        <td><span class="company-badge">新东方</span></td>
+      </tr>
+      <tr onclick="toDetail('客服')">
+        <td>客服</td>
+        <td><span class="salary-badge">4k/月</span></td>
+        <td><span class="company-badge">拼多多</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/layui@2.9.6/dist/layui.js"></script>
+<script>
+function toDetail(job){
+  window.location.href = 'job-detail.html?job='+encodeURIComponent(job);
+}
+</script>
+</body>
+</html>

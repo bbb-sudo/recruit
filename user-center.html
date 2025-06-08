@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>个人中心</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/layui@2.9.6/dist/css/layui.css">
+  <style>
+    body { background: #232a36; }
+    .main-panel { background:#fff; border-radius:8px; min-height:600px; margin:40px auto; width:90%; padding:30px;}
+    .user-info { display: flex; align-items: center; border-bottom:1px solid #eee; padding-bottom:20px;}
+    .user-avatar { width:90px; height:90px; border-radius:50%; background:#eee; margin-right:30px;}
+    .user-basic { flex:1; }
+    .user-basic span { margin-right:30px; font-size:16px; }
+    .user-op { color:#01AAED; cursor:pointer; }
+    .bind-box { margin-top:30px; }
+    .bind-item { border:1px solid #e6e6e6; padding:15px 20px; margin-bottom:10px; border-radius:6px; display:flex; justify-content:space-between; align-items:center;}
+    .card-title { font-weight:bold; }
+    .user-tabs { display:flex; justify-content:space-around; margin:30px 0;}
+    .user-tab { text-align:center; cursor:pointer; padding:6px 0;}
+    .user-tab.active { color:#01AAED; border-bottom:2px solid #01AAED; }
+    .user-feed { background:#f6f6f6; padding:30px; border-radius:8px;}
+  </style>
+</head>
+<body>
+  <div class="main-panel">
+    <div style="display:flex;align-items:center;">
+      <a href="home.html" style="font-size:22px;color:#009688;margin-right:15px;"><i class="layui-icon">&#xe68e;</i></a>
+      <span style="font-size:20px;font-weight:bold;">主面板</span>
+    </div>
+    <div class="user-info">
+      <div class="user-avatar"><img src="https://static/avatar.png" style="width:90px;height:90px;border-radius:50%;"></div>
+      <div class="user-basic">
+        <span>小王</span>
+        <span>职位: 厨师</span>
+        <span>20岁/本科</span>
+      </div>
+      <div class="user-op"><a href="#">操作</a></div>
+    </div>
+    <div class="bind-box">
+      <div class="card-title">账号管理</div>
+      <div class="bind-item">绑定手机号 <span>11111111111</span> <a class="layui-link" href="#">More</a></div>
+      <div class="bind-item">绑定微信号 <span>aaaa</span> <a class="layui-link" href="#">More</a></div>
+    </div>
+    <div class="user-tabs">
+      <div class="user-tab active" data-tab="talked">沟通过</div>
+      <div class="user-tab" data-tab="sent">已投简历</div>
+      <div class="user-tab" data-tab="favorite">感兴趣</div>
+    </div>
+    <div class="user-feed" id="userFeed">
+      发布内容，发表我的分享！
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/layui@2.9.6/dist/layui.js"></script>
+  <script>
+    // 标签切换
+    document.querySelectorAll('.user-tab').forEach(function(tab){
+      tab.onclick = function(){
+        document.querySelectorAll('.user-tab').forEach(t=>t.classList.remove('active'));
+        tab.classList.add('active');
+        var type = tab.getAttribute('data-tab');
+        var feed = document.getElementById('userFeed');
+        if(type === 'talked'){
+          feed.innerHTML = '与企业沟通记录将在这里显示。';
+        }else if(type === 'sent'){
+          feed.innerHTML = '已投递的简历记录将在这里显示。';
+        }else{
+          feed.innerHTML = '你感兴趣的职位/企业将在这里显示。';
+        }
+      }
+    });
+  </script>
+</body>
+</html>

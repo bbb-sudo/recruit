@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>招聘系统</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/layui@2.9.6/dist/css/layui.css">
+  <style>
+    .side-nav { width: 200px; background: #2c3e50; min-height: 100vh; float: left; }
+    .side-nav .layui-nav-item a { color: #fff; }
+    .main-content { margin-left: 200px; padding: 30px; }
+    .site-title { font-size: 22px; color: #fff; padding: 16px; }
+  </style>
+</head>
+<body>
+  <div class="side-nav">
+    <div class="site-title">招聘系统</div>
+    <ul class="layui-nav layui-nav-tree" lay-filter="menu">
+      <li class="layui-nav-item layui-this"><a href="home.html">首页</a></li>
+      <li class="layui-nav-item"><a href="job-list.html">职位列表</a></li>
+      <li class="layui-nav-item"><a href="login.html">用户注册/登录</a></li>
+      <li class="layui-nav-item"><a href="job-detail.html">岗位详情页</a></li>
+      <li class="layui-nav-item"><a href="resume.html">个人简历</a></li>
+      <li class="layui-nav-item"><a href="user-center.html">个人中心</a></li>
+    </ul>
+  </div>
+  <div class="main-content">
+    <!-- 页面内容插槽 -->
+    <!-- 通过不同页面include或者iframe引入 -->
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/layui@2.9.6/dist/layui.js"></script>
+  <script>
+    layui.use('element', function(){});
+  </script>
+</body>
+</html>

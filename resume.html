@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>简历编辑</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/layui@2.9.6/dist/css/layui.css">
+  <style>
+    body { background: #232a36; }
+    .main-panel { background:#fff; border-radius:8px; min-height:600px; margin:40px auto; width:90%; display:flex; padding:40px;}
+    .resume-menu { width:220px; border-right:1px solid #eee; }
+    .resume-menu .layui-nav-itemed>.layui-nav-child { background:#f6f6f6; }
+    .resume-content { flex:1; padding:0 40px;}
+    .layui-form-label { width:100px; }
+    .layui-input-block { margin-left:130px; }
+    .layui-btn { margin-right:10px; }
+  </style>
+</head>
+<body>
+  <div class="main-panel">
+    <div class="resume-menu">
+      <ul class="layui-nav layui-nav-tree" lay-filter="resumeMenu">
+        <li class="layui-nav-item layui-nav-itemed">
+          <a href="javascript:;">简历</a>
+          <dl class="layui-nav-child">
+            <dd class="layui-this"><a href="javascript:;" data-section="base">基本信息</a></dd>
+            <dd><a href="javascript:;" data-section="expect">期望职位</a></dd>
+            <dd><a href="javascript:;" data-section="adv">个人优势</a></dd>
+            <dd><a href="javascript:;" data-section="edu">教育经历</a></dd>
+            <dd><a href="javascript:;" data-section="pro">项目经历</a></dd>
+            <dd><a href="javascript:;" data-section="job">工作经历</a></dd>
+          </dl>
+        </li>
+      </ul>
+    </div>
+    <div class="resume-content">
+      <form class="layui-form" lay-filter="resumeForm" id="resumeForm">
+        <div id="form-base" class="form-section">
+          <h3>编辑个人信息</h3>
+          <div class="layui-form-item">
+            <label class="layui-form-label">姓名 <span style="color:red;">*</span></label>
+            <div class="layui-input-inline"><input type="text" name="name" required lay-verify="required" placeholder="请输入" class="layui-input"></div>
+            <label class="layui-form-label">年龄 <span style="color:red;">*</span></label>
+            <div class="layui-input-inline"><input type="number" name="age" required lay-verify="required|number" placeholder="请输入" class="layui-input"></div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">性别 <span style="color:red;">*</span></label>
+            <div class="layui-input-inline">
+              <select name="gender" required lay-verify="required">
+                <option value="">请选择</option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+              </select>
+            </div>
+            <label class="layui-form-label">求职状态 <span style="color:red;">*</span></label>
+            <div class="layui-input-inline">
+              <select name="status" required lay-verify="required">
+                <option value="">请选择</option>
+                <option value="在职">在职</option>
+                <option value="离职待业">离职待业</option>
+                <option value="在读学生">在读学生</option>
+              </select>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">联系方式 <span style="color:red;">*</span></label>
+            <div class="layui-input-block">
+              <input type="text" name="contact" required lay-verify="required" placeholder="请输入" class="layui-input">
+            </div>
+          </div>
+        </div>
+        <div id="form-expect" class="form-section" style="display:none;">
+          <h3>期望职位</h3>
+          <div class="layui-form-item">
+            <label class="layui-form-label">期望职位</label>
+            <div class="layui-input-block"><input type="text" name="job_expect" placeholder="请输入内容" class="layui-input"></div>
+          </div>
+        </div>
+        <div id="form-adv" class="form-section" style="display:none;">
+          <h3>个人优势</h3>
+          <div class="layui-form-item">
+            <label class="layui-form-label">个人优势</label>
+            <div class="layui-input-block"><textarea name="advantage" placeholder="请输入内容" class="layui-textarea"></textarea></div>
+          </div>
+        </div>
+        <div id="form-edu" class="form-section" style="display:none;">
+          <h3>教育经历</h3>
+          <div class="layui-form-item">
+            <label class="layui-form-label">教育经历</label>
+            <div class="layui-input-block"><textarea name="education" placeholder="请输入内容" class="layui-textarea"></textarea></div>
+          </div>
+        </div>
+        <div id="form-pro" class="form-section" style="display:none;">
+          <h3>项目经历</h3>
+          <div class="layui-form-item">
+            <label class="layui-form-label">项目经历</label>
+            <div class="layui-input-block"><textarea name="project" placeholder="请输入内容" class="layui-textarea"></textarea></div>
+          </div>
+        </div>
+        <div id="form-job" class="form-section" style="display:none;">
+          <h3>工作经历</h3>
+          <div class="layui-form-item">
+            <label class="layui-form-label">工作经历</label>
+            <div class="layui-input-block"><textarea name="work" placeholder="请输入内容" class="layui-textarea"></textarea></div>
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="submitResume">确定</button>
+            <button type="reset" class="layui-btn layui-btn-primary">取消</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/layui@2.9.6/dist/layui.js"></script>
+  <script>
+  layui.use(['form','element'], function(){
+    var form = layui.form, $ = layui.$;
+    // 左侧菜单切换表单部分
+    $('.resume-menu dd a').on('click', function(){
+      var section = $(this).data('section');
+      $('.form-section').hide();
+      $('#form-' + section).show();
+      $('.resume-menu dd').removeClass('layui-this');
+      $(this).parent().addClass('layui-this');
+    });
+    // 表单校验和提交
+    form.on('submit(submitResume)', function(data){
+      layer.msg('保存成功！');
+      // 模拟保存，可AJAX
+      return false;
+    });
+  });
+  </script>
+</body>
+</html>

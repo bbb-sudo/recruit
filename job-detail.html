@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>岗位详情页</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/layui@2.9.6/dist/css/layui.css">
+  <style>
+    body { background: #232a36;}
+    .main-panel { background:#fff; border-radius:8px; min-height:600px; margin:40px auto; width:90%; padding:30px;}
+    .nav-head { margin-bottom:20px; }
+    .job-header { background:#7c16e7; color:white; padding:24px 32px; border-radius:4px; display:flex; align-items:center; justify-content:space-between; }
+    .job-title { font-size:22px; font-weight:bold;}
+    .job-salary { font-size:22px;}
+    .job-tags { margin-top:18px;}
+    .job-tags .layui-btn { margin-right:10px; background:#23c6c8; color:#fff; }
+    .job-tags .layui-btn:last-child { background:#999;}
+    .section-title { margin-top:30px; font-size:22px; font-weight:normal;}
+    .job-detail-box { margin-top:10px; border:1px solid #eee; border-radius:6px; padding:20px; background:#fafbfc;}
+    .work-address { margin-top:36px;}
+  </style>
+</head>
+<body>
+  <div class="main-panel">
+    <!-- 顶部返回首页 -->
+    <div class="nav-head">
+      <a href="index.html" style="font-size:22px;color:#009688;margin-right:15px;"><i class="layui-icon">&#xe68e;</i></a>
+      <span style="font-size:20px;font-weight:bold;">主面板</span>
+    </div>
+    <!-- 岗位卡片 -->
+    <div class="job-header">
+      <div>
+        <div class="job-title">厨师</div>
+        <div class="job-tags" style="margin-top:14px;">
+          <button class="layui-btn layui-btn-xs" onclick="filterByTag('宁波')">宁波</button>
+          <button class="layui-btn layui-btn-xs layui-btn-normal" onclick="filterByTag('三年以上')">三年以上</button>
+          <button class="layui-btn layui-btn-xs layui-btn-primary" onclick="filterByTag('双休')">双休</button>
+        </div>
+      </div>
+      <div class="job-salary">8k</div>
+    </div>
+    <!-- 岗位详情 -->
+    <div class="section-title">岗位详情</div>
+    <div class="job-detail-box">
+      <div>
+        <b>工作内容：</b>
+        <ol style="margin-bottom:12px;">
+          <li>食品备餐、出餐、盘货；（食品主要为米线，较简单，不要求专业厨师水平）</li>
+          <li>会服务员工作；（与服务员轮班，就餐区主要在一楼，上下楼梯）</li>
+          <li>保障食品安全卫生。</li>
+        </ol>
+        <b>职位要求：</b>
+        <ol style="margin-bottom:12px;">
+          <li>工作细心负责有耐心，积极向上；</li>
+          <li>有工作经验者优先，男女不限；</li>
+          <li>无需自备菜谱，对已有菜谱熟记于心；</li>
+          <li>个人卫生良好，需要有健康证；</li>
+          <li>和同事之间有良好的配合。</li>
+        </ol>
+        <b>福利待遇：</b>
+        <ol>
+          <li>用餐补贴，节假日双薪（不含调休）；</li>
+          <li>年终福利。</li>
+        </ol>
+      </div>
+    </div>
+    <!-- 工作地址 -->
+    <div class="work-address">
+      <div class="section-title" style="font-size:20px;">工作地址</div>
+      <button class="layui-btn layui-btn-primary" id="showAddressBtn">查看公司地址</button>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/layui@2.9.6/dist/layui.js"></script>
+  <script>
+    // 查看公司地址按钮弹窗
+    layui.use('layer', function(){
+      var layer = layui.layer;
+      document.getElementById('showAddressBtn').onclick = function(){
+        layer.open({
+          title: '公司地址',
+          content: '宁波市鄞州区某某路88号（示例地址）',
+          area: ['380px', '180px']
+        });
+      }
+    });
+    // 标签筛选跳转
+    function filterByTag(tag) {
+      // 实际可跳转到列表并带筛选参数，当前为示例
+      layui.layer.open({
+        title: '筛选',
+        content: '跳转到带标签 "' + tag + '" 的相关岗位列表。',
+        area: ['320px', '120px']
+      });
+      // 实际可用 window.location.href = 'job-list.html?tag=' + encodeURIComponent(tag);
+    }
+  </script>
+</body>
+</html>

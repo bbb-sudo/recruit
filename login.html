@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>用户登录</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/layui@2.9.6/dist/css/layui.css">
+  <style>
+    body {
+      background: #232a36;
+      min-height: 100vh;
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-bg-panel {
+      width: 100vw;
+      height: 100vh;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-panel {
+      width: 100%;
+      max-width: 410px;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 28px rgba(74,58,255,0.09), 0 1.5px 4px rgba(44,200,200,0.06);
+      padding: 38px 38px 28px 38px;
+      position: relative;
+      margin: 0;
+    }
+    .login-title {
+      text-align: center;
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: #4A3AFF;
+      margin-bottom: 28px;
+      letter-spacing: 2px;
+    }
+    .layui-form-label {
+      width: 80px !important;
+      font-size: 1rem;
+      color: #333;
+      font-weight: 500;
+      padding-left: 0;
+      background: transparent;
+    }
+    .layui-input-inline {
+      width: 220px !important;
+      position: relative;
+    }
+    .layui-input {
+      height: 40px;
+      border-radius: 7px;
+      font-size: 1rem;
+      border: 1.5px solid #e0e4fa;
+      box-shadow: none;
+      padding-left: 12px;
+      background: #f8faff;
+      transition: border-color 0.2s;
+    }
+    .layui-input:focus {
+      border-color: #4A3AFF;
+      background: #fff;
+    }
+    #pwdToggle {
+      position: absolute;
+      right: 14px;
+      top: 12px;
+      color: #aaa;
+      cursor: pointer;
+      font-size: 18px;
+      transition: color 0.2s;
+    }
+    #pwdToggle:hover {
+      color: #4A3AFF;
+    }
+    .layui-form-item {
+      margin-bottom: 26px;
+    }
+    .layui-btn-normal {
+      width: 100%;
+      height: 42px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #4A3AFF 70%, #2DC4C8 100%);
+      border: none;
+    }
+    .layui-btn-normal:hover {
+      background: linear-gradient(90deg, #2DC4C8 10%, #4A3AFF 100%);
+      opacity: 0.95;
+    }
+    .layui-form-checkbox span {
+      font-size: 1rem;
+    }
+    @media (max-width: 500px) {
+      .login-panel {
+        padding: 16px 4vw 16px 4vw;
+        max-width: 97vw;
+      }
+      .layui-input-inline {
+        width: 99% !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-bg-panel">
+    <div class="login-panel">
+      <div class="login-title">用户登录</div>
+      <form class="layui-form" lay-filter="loginForm">
+        <div class="layui-form-item">
+          <label class="layui-form-label">* 用户名</label>
+          <div class="layui-input-inline">
+            <input type="text" name="username" required lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">* 密码</label>
+          <div class="layui-input-inline">
+            <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input" id="pwdInput">
+            <i class="layui-icon" id="pwdToggle">&#xe651;</i>
+          </div>
+        </div>
+        <div class="layui-form-item" style="margin-bottom: 18px;">
+          <input type="checkbox" name="remember" title="记住密码">
+        </div>
+        <div class="layui-form-item">
+          <button class="layui-btn layui-btn-normal" lay-submit lay-filter="login">登 录</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/layui@2.9.6/dist/layui.js"></script>
+  <script>
+  layui.use(['form','layer'], function(){
+    var form = layui.form, $ = layui.$, layer = layui.layer;
+    form.on('submit(login)', function(data){
+      if(data.field.username && data.field.password){
+        layer.msg('登录成功！');
+        setTimeout(()=>location.href="user-center.html",1000);
+      }
+      return false;
+    });
+    // 密码显示/隐藏
+    $('#pwdToggle').on('click',function(){
+      var inp = $('#pwdInput');
+      var type = inp.attr('type') === 'password' ? 'text' : 'password';
+      inp.attr('type',type);
+      $(this).html(type === 'password' ? '&#xe651;' : '&#xe652;');
+    });
+  });
+  </script>
+</body>
+</html>

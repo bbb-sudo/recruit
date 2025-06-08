@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>招聘系统首页</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/layui@2.9.6/dist/css/layui.css">
+  <style>
+    body { background: #232a36; }
+    .main-panel {
+      background: #fff;
+      border-radius: 8px;
+      margin: 40px auto;
+      width: 880px;
+      max-width: 95vw;
+      padding: 0 0 30px 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .top-bar {
+      border-radius: 8px 8px 0 0;
+      background: #5F21E9;
+      padding: 0 36px;
+      position: relative;
+    }
+    .layui-nav {
+      background: transparent;
+      padding-left: 0;
+      min-width: unset;
+      float: left;
+    }
+    .layui-nav .layui-nav-item a {
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 0 26px;
+    }
+    .layui-nav .layui-this a, .layui-nav .layui-nav-itemed a {
+      color: #ffe600 !important;
+      background: transparent !important;
+    }
+    .top-bar .layui-btn {
+      margin-top: 17px;
+      float: right;
+      margin-left: 10px;
+      background: #2DC4C8;
+      color: #fff;
+    }
+    .search-row { padding: 30px 36px 10px 36px; }
+    #searchInput { width: 330px; display:inline-block; }
+    #searchBtn { margin-left: 8px; }
+    #historyList {
+      width: 330px;
+      left: 36px;
+      background: #f8f8f8;
+      border-radius: 0 0 6px 6px;
+      border: 1px solid #eaeaea;
+      border-top: none;
+      position: absolute;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      top: 78px;
+    }
+    #historyList .history-item {
+      padding: 8px 16px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #333;
+    }
+    #historyList .history-item:hover {
+      background: #e8f6ff;
+    }
+    .banner-row { padding: 0 36px; }
+    .industry-row { padding: 16px 36px 0 36px; }
+    .layui-table th, .layui-table td { font-size: 15px; }
+  </style>
+</head>
+<body>
+  <div class="main-panel">
+    <!-- 顶部主导航 -->
+    <div class="top-bar" style="height:60px;">
+      <ul class="layui-nav" lay-filter="top-nav" style="background:transparent;">
+        <li class="layui-nav-item layui-this"><a href="home.html">首页</a></li>
+        <li class="layui-nav-item"><a href="job-list.html">职位</a></li>
+        <li class="layui-nav-item"><a href="#">公司</a></li>
+      </ul>
+      <a href="register.html" class="layui-btn layui-btn-sm" style="float:right;margin-top:13px;">注册</a>
+      <a href="login.html" class="layui-btn layui-btn-sm" style="float:right;margin-top:13px;">登录</a>
+      <div style="clear:both"></div>
+    </div>
+
+    <!-- 搜索栏 -->
+    <div class="search-row">
+      <input type="text" id="searchInput" placeholder="请输入职位/公司" class="layui-input" autocomplete="off">
+      <button class="layui-btn layui-btn-primary" id="searchBtn">搜索</button>
+      <div id="historyList" style="display:none;position:absolute;"></div>
+    </div>
+
+    <!-- 轮播图 -->
+    <div class="banner-row">
+      <div class="layui-carousel" id="banner" style="margin-bottom:20px;">
+        <div carousel-item>
+          <div><img src="C:\Users\36418\Pictures\Screenshots\屏幕截图 2025-06-07 221559.png" style="width:100%;border-radius:8px;"></div>
+          <div><img src="C:\Users\36418\Pictures\Screenshots\屏幕截图 2025-06-07 203246.png" style="width:100%;border-radius:8px;"></div>
+          <div><img src="C:\Users\36418\Pictures\Screenshots\屏幕截图 2025-06-07 221949.png" style="width:100%;border-radius:8px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 行业分类 -->
+    <div class="industry-row">
+      <table class="layui-table">
+        <thead>
+          <tr><th>行业分类</th><th>典型岗位</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>互联网</td>
+            <td>数据分析师 数据仓库 爬虫工程师</td>
+          </tr>
+          <tr>
+            <td>电子/电气</td>
+            <td>电子工程师 硬件工程师</td>
+          </tr>
+          <tr>
+            <td>销售</td>
+            <td>销售专员 电话销售 网络销售</td>
+          </tr>
+          <tr>
+            <td>生产制造</td>
+            <td>普工/操作工 包装工 学徒工</td>
+          </tr>
+          <tr>
+            <td>服务业</td>
+            <td>服务员 收银 礼仪/迎宾/接待</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/layui@2.9.6/dist/layui.js"></script>
+  <script>
+  layui.use('carousel', function(){
+    var carousel = layui.carousel;
+    carousel.render({ elem: '#banner', width: '100%', height: '200px', interval: 3000 });
+  });
+  // 搜索历史
+  let history = ['递数据分析实习','正在输入的关键词'];
+  const input = document.getElementById('searchInput');
+  const historyList = document.getElementById('historyList');
+  input.addEventListener('input', function(){
+    let val = this.value.trim();
+    let list = '';
+    if(val) {
+      let matches = history.filter(h=>h.indexOf(val)>-1);
+      if(matches.length) {
+        list = matches.map(h=>`<div class="history-item">${h}</div>`).join('');
+        historyList.innerHTML = list;
+        historyList.style.display = 'block';
+      } else {
+        historyList.style.display = 'none';
+      }
+    } else {
+      historyList.style.display = 'none';
+    }
+  });
+  // 搜索历史点击自动填充
+  historyList.addEventListener('click', function(e){
+    if(e.target.classList.contains('history-item')){
+      input.value = e.target.textContent;
+      historyList.style.display = 'none';
+    }
+  });
+  // 失去焦点时隐藏历史
+  input.addEventListener('blur', function(){
+    setTimeout(()=>historyList.style.display='none', 120);
+  });
+  document.getElementById('searchBtn').onclick = function(){
+    window.location.href = 'job-list.html?kw='+encodeURIComponent(input.value.trim());
+  };
+  </script>
+</body>
+</html>
